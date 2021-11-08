@@ -1,0 +1,40 @@
+
+<div class="card">
+    <div class="card-header">
+        <h4>Edit students</h4>
+    </div>
+        <div class="card-body">
+            <form method="POST">
+                <div class="form-group">
+                    <label for="txtStudentID">Ma hoc sinh</label>
+                    <input type="text" class="form-control" id="txtStudentID" name="txtStudentID" readonly autofocus value="{{this.students.MaHS}}">
+                    <label for="txtName">Ho va ten</label>
+                    <input type="text" class="form-control" id="txtName" name="txtName" value="{{this.students.HoTen}}">
+                    <label for="txtClass">Lop</label>
+                    <input type="text" class="form-control" id="txtClass" name="txtClass" value="{{this.students.MaLop}}">
+                    <label for="txtGender">Gioi tinh</label>
+                    <input type="text" class="form-control" id="txtGender" name="txtGender" value="{{this.students.GioiTinh}}">
+                    <label for="txtBirth">Ngay sinh</label>
+                    <input type="text" class="form-control" id="txtBirth" name="txtBirth" value="{{this.students.NgaySinh}}">
+                    <label for="txtAddress">Dia chi</label>
+                    <input type="text" class="form-control" id="txtAddress" name="txtAddress" value="{{this.students.DiaChi}}">
+                    <label for="txtEmail">Email</label>
+                    <input type="text" class="form-control" id="txtEmail" name="txtEmail" value="{{this.students.Email}}">
+                    <label for="txtAccount">Ma tai khoan</label>
+                    <input type="text" class="form-control" id="txtAccount" name="txtAccount" value="{{this.students.MaTK}}">
+                </div>
+                <a class="btn btn-success" href="/admin/students" role="button" title="Back">
+                    <i class="fa fa-backward" aria-hidden="true"></i>
+                </a>
+                <button type="submit" class="btn btn-danger" title="Remove" formaction="/admin/students/del">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </button>
+                <button type="submit" class="btn btn-primary" formaction="/admin/students/update">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                </button>
+                </form>
+        </div>
+    <div class="card-footer text-muted">
+        Footer
+    </div>
+</div>

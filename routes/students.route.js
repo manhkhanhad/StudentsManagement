@@ -30,9 +30,47 @@ router.post('/add', async function(req, res) {
         Email: req.body.txtEmail,
         MaLop: req.body.txtClass,
     }
-    const rs = await model.add(entity);
+    const rs = await StudentModel.add(entity);
     console.log(entity);
     res.render('vwStudents/add');
+});
+
+router.get('/edit', async function(req, res) {
+    const id = +req.query.id || -1;
+    const row = await StudentModel.single(id);
+    if (row.length === 0) {
+        // throw new Error('Invalid Student ID');
+        res.send('Invalid Student ID');
+    }
+    const students = row[0];
+    res.render('vwStudents/edit',{students});
+});
+
+
+router.post('/update', async function(req, res) {
+    const entity = {
+        MaHS: req.body.txtStudentID,
+        MaTK: req.body.txtAccount,
+        HoTen: req.body.txtName,
+        GioiTinh: req.body.txtGender,
+        NgaySinh: req.body.txtBirth,
+        DiaChi: req.body.txtAddress,
+        Email: req.body.txtEmail,
+        MaLop: req.body.txtClass,
+    }
+    const rs = await StudentModel.patch(entity);
+    //console.log(entity);
+    res.redirect('/admin/students/');
+});
+
+
+router.post('/del', async function(req, res) {
+    const entity = {
+        MaHS: req.body.txtStudentID,
+    }
+    const rs = await StudentModel.del(entity);
+    console.log(rs);
+    res.redirect('/admin/students/');
 });
 
 module.exports = router;
