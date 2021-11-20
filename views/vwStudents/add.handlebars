@@ -1,7 +1,3 @@
-{{#section 'title'}}
-- Add Student
-{{/section}}
-
 <div class="card">
     <div class="card-header">
         <h4>Add Categories</h4>
@@ -39,3 +35,27 @@
         Footer
     </div>
 </div>
+{{#section 'title'}}
+- Add Student
+{{/section}}
+
+{{#section 'css'}}
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js">
+{{/section}}
+
+{{#section 'js'}}
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+<script>
+    $('#txtBirth').datetimepicker({
+        format: 'Y-m-d',
+        timepicker: false,
+        mask: true,
+    });
+
+    function validate(){
+        return true;
+    }
+</script>
+{{/section}}

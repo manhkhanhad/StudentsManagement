@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `bangdiem` (
   `Diem15p` decimal(3,1) DEFAULT NULL,
   `Diem1Tiet` decimal(3,1) DEFAULT NULL,
   `DiemHK` decimal(3,1) DEFAULT NULL,
-  `DiemTB` decimal(3,1) GENERATED ALWAYS AS ((((`Diem15p` + (`Diem1Tiet` * 2)) + (`DiemHK` * 3)) / (((`Diem15p` is not null) + ((`Diem1Tiet` is not null) * 2)) + ((`DiemHK` is not null) * 3)))) STORED,
+  -- `DiemTB` decimal(3,1) GENERATED ALWAYS AS ((((`Diem15p` + (`Diem1Tiet` * 2)) + (`DiemHK` * 3)) / (((`Diem15p` is not null) + ((`Diem1Tiet` is not null) * 2)) + ((`DiemHK` is not null) * 3)))) STORED,
   KEY `MaHS` (`MaHS`),
   KEY `MaMon` (`MaMon`),
   KEY `TenHK` (`TenHK`)
@@ -184,8 +184,49 @@ INSERT INTO `monhoc` (`MaMH`, `TENMH`) VALUES
 ('VAN', 'Ngu van'),
 ('DDU', 'Dao duc'),
 ('TDU', 'The duc');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `taikhoan`
+--
+
+DROP TABLE IF EXISTS `taikhoan`;
+CREATE TABLE IF NOT EXISTS `taikhoan` (
+  `MaTK`  		int NOT NULL AUTO_INCREMENT,
+  `TenDN` 	  varchar(50) NOT NULL UNIQUE,
+  `MatKhau`   varchar(255)   NOT NULL,
+  `ChucVu`		varchar(11) NOT NULL,
+
+  PRIMARY KEY (`MaTK`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `taikhoan`
+--
+
+INSERT INTO `taikhoan` (`MaTK`, `TenDN`, `MatKhau`, `ChucVu`) VALUES
+('HS19220001', '19220001', '123456', 'HocSinh'),
+('HS19220002', '19220002', '123456', 'HocSinh'),
+('HS19220003', '19220003', '123456', 'HocSinh'),
+('HS19220004', '19220004', '123456', 'HocSinh'),
+('HS19220005', '19220005', '123456', 'HocSinh'),
+('HS20230001', '20230001', '123456', 'HocSinh'),
+('HS20230002', '20230002', '123456', 'HocSinh'),
+('HS20230003', '20230003', '123456', 'HocSinh'),
+('HS20230004', '20230004', '123456', 'HocSinh'),
+('HS20230005', '20230005', '123456', 'HocSinh'),
+('HS21240001', '21240001', '123456', 'HocSinh'),
+('HS21240002', '21240002', '123456', 'HocSinh'),
+('HS21240003', '21240003', '123456', 'HocSinh'),
+('HS21240004', '21240004', '123456', 'HocSinh'),
+('HS21240005', '21240005', '123456', 'HocSinh');
+
+
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+

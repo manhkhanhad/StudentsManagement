@@ -5,19 +5,14 @@ const config = require('../config/default.json');
 const pool = mysql.createPool(config.mysql);
 
 module.exports = {
-
-      load: function(sql)
-      {
+      load: function(sql) {
         return new Promise(function(resolve, reject){
             pool.query(sql, function(error, results, fields){
-              if(error)
-              {
-                reject(error);
+              if (error) {
+                return reject(error);
               }
-              else
-              {
-                resolve(results);
-              }
+              
+              resolve(results);
             });
         });
       },
