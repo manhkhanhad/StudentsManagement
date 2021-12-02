@@ -36,10 +36,16 @@ CREATE TABLE IF NOT EXISTS `bangdiem` (
   `Diem1Tiet` decimal(3,1) DEFAULT NULL,
   `DiemHK` decimal(3,1) DEFAULT NULL,
   -- `DiemTB` decimal(3,1) GENERATED ALWAYS AS ((((`Diem15p` + (`Diem1Tiet` * 2)) + (`DiemHK` * 3)) / (((`Diem15p` is not null) + ((`Diem1Tiet` is not null) * 2)) + ((`DiemHK` is not null) * 3)))) STORED,
+  -- `MaBangDiem` varchar(15) GENERATED ALWAYS AS (CONCAT(`MaMon`,`MaLop`,`MaHK`,RIGHT(CONCAT('0000',CAST(`AI_INT` as VARCHAR(4))),4)))
+  `MaTK` int NOT NULL AUTO_INCREMENT,
   KEY `MaHS` (`MaHS`),
   KEY `MaMon` (`MaMon`),
   KEY `TenHK` (`TenHK`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+ALTER TABLE bangdiem 
+MODIFY COLUMN
+MaBangDiem varchar(15) GENERATED ALWAYS AS (CONCAT(`MaMon`,`MaLop`,`MaHK`,RIGHT(CONCAT('0000',CAST(`AI_INT` as VARCHAR(4))),4)))
 
 --
 -- Dumping data for table `bangdiem`
@@ -113,7 +119,7 @@ INSERT INTO `hocsinh` (`MaHS`, `MaTK`, `HoTen`, `GioiTinh`, `NgaySinh`, `DiaChi`
 ('19220002', 'HS19220002', 'Tran Ngoc Han', 'Nu', '2004-03-11', 'Kien Giang', 'ngochan@gmail.com', '12A1'),
 ('19220003', 'HS19220003', 'Tran Ngoc Linh', 'Nu', '2004-05-24', 'Tay Ninh', 'ngoclinh@gmail.com', '12A2'),
 ('19220004', 'HS19220004', 'Le Nhat Minh', 'Nam', '2004-07-06', 'Nghe An', 'minhtam@gmail.com', '12A2'),
-('19220005', 'HS19220005', 'Phan Thi Thanh Tam', 'Nu', '2004-01-09', 'Vinh Long', 'thanhtam@gmail.com', '12A13'),
+('19220005', 'HS19220005', 'Phan Thi Thanh Tam', 'Nu', '2004-01-09', 'Vinh Long', 'thanhtam@gmail.com', '12A3'),
 ('20230001', 'HS20230001', 'Phan Thanh Trieu', 'Nam', '2005-02-12', 'Dong Nai', 'thanhtrieu@gmail.com', '11A1'),
 ('20230002', 'HS20230002', 'Le Quang Hien', 'Nam', '2005-06-20', 'TpHCM', 'quanghien@gmail.com', '11A3'),
 ('20230003', 'HS20230003', 'Tran Thi Hong Tham', 'Nu', '2005-01-10', 'TpHCM', 'hongtham@gmail.com', '11A2'),
@@ -230,3 +236,10 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
+
+
+BEGIN
+    UPDATE `bangdiem`
+    SET MaBangDiem = CONCAT(NEW.MaMon,NEW.MaLop,NEW.MaHK,RIGHT(CONCAT('0000',CAST(NEW.AI_INT as VARCHAR(4))),4))
+    WHERE bangdiem.MaMon = NEW.MaMon and bangdiem.MaLop = NEW.MaLop and bangdiem.MaHK = NEW.MaHK
+END

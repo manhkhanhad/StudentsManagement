@@ -33,10 +33,41 @@ module.exports = {
         });
       },
 
+      addMultiEntry: function(table, columns, entity){
+          return new Promise(function(resolve, reject){
+            const sql = `INSERT INTO ${table} (${columns}) VALUES ?`;
+            pool.query(sql,[entity], function(error, results, fields){
+              if(error)
+              {
+                reject(error);
+              }
+              else
+              {
+                resolve(results);
+              }
+            });
+        });
+      },
+
       patch: function(table, entity, condition){
         return new Promise(function(resolve, reject){
           const sql = `update ${table} set ? where ?`;
           pool.query(sql,[entity,condition],function(error, results, fields){
+            if(error)
+            {
+              reject(error);
+            }
+            else
+            {
+              resolve(results);
+            }
+          });
+      });
+    },
+      
+      customQuery: function(sql){
+        return new Promise(function(resolve, reject){
+          pool.query(sql, function(error, results, fields){
             if(error)
             {
               reject(error);
