@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require('../utils/db')
 const GradeModel = require('../models/grades.model')
 
-// Truy cuu bang diem lop hoc
+// Tra cuu bang diem lop hoc
 // url example = http://localhost:3000/grade/gradeTabel?Lop=10A1&HocKy=HK1&Mon=Toa
 
 router.get('/gradeTabel', async function(req, res) {
@@ -67,5 +67,31 @@ router.post('/editGradeTabel', async function(req, res) {
     }
     res.send("done")
 });
+
+// Lap Bao Cao Tong Ket Mon Hoc
+// url example = http://localhost:3000/grade/createSubjectReport
+router.get('/createSubjectReport', async function(req, res) {
+    const entity = {
+        MaMon: req.body.MaMon,
+        MaHK: req.body.MaHK,
+    }
+    const rs = await GradeModel.createSubjectReport(entity)
+    res.send(rs)
+});
+
+// Lap Bao Cao Tong Ket Lop Hoc
+// url example = http://localhost:3000/grade/createClassReport
+router.get('/createClassReport', async function(req, res) {
+    const entity = {
+        MaHK: req.body.MaHK,
+    }
+    const rs = await GradeModel.createClassReport(entity)
+    res.send(rs)
+});
+
+
+
+
+
 
 module.exports = router;
