@@ -25,4 +25,7 @@ module.exports = {
         }
         return db.del("hocsinh", condition);
     },
+    searchclass: function(searchque){
+        return db.load(`SELECT * from (hocsinh left join lop on hocsinh.MaLop=lop.MaLop) where lop.MaLop=${searchque.MaLop}`)
+    },
 }

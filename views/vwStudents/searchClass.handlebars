@@ -1,0 +1,52 @@
+<div class="card">
+  <div class="card-body">
+    <div class="search-box">
+      <form action="search" class="search-form">
+        <input type="text" name="txtClass" placeholder="Search..." required>
+        <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
+    </div>
+    {{#if this.empty}}
+      <div class="card-body">
+        <h4 class="card-text">Khong co du lieu</h4>
+      </div>
+    {{else}}
+    <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Ma hoc sinh</th>
+        <th scope="col">Ho va ten</th>
+        <th scope="col">Lop</th>
+        <th scope="col">Gioi tinh</th>
+        <th scope="col">Ngay sinh</th>
+        <th scope="col">Dia chi</th>
+        <th scope="col">Email</th>
+        <th scope="col">Ma tai khoan</th>
+        <th scope="col">&NonBreakingSpace;</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each this.students}}
+      <tr>
+        <th scope="row">{{MaHS}}</th>
+        <td>{{HoTen}}</td>
+        <td>{{Lop}}</td>
+        <td>{{GioiTinh}}</td>
+        <td>{{NgaySinh}}</td>
+        <td>{{DiaChi}}</td>
+        <td>{{Email}}</td>
+        <td>{{MaTK}}</td>
+      </tr>
+
+      {{/each}}
+    </tbody>
+    </table>
+    {{/if}}
+    <div class="card-footer text-muted">
+        Footer
+    </div>
+  </div>
+</div>
+{{#section 'title'}}
+- Search Class
+{{/section}}

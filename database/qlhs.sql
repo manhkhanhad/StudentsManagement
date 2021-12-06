@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `bangdiem` (
   `Diem15p` decimal(3,1) DEFAULT NULL,
   `Diem1Tiet` decimal(3,1) DEFAULT NULL,
   `DiemHK` decimal(3,1) DEFAULT NULL,
-  -- `DiemTB` decimal(3,1) GENERATED ALWAYS AS ((((`Diem15p` + (`Diem1Tiet` * 2)) + (`DiemHK` * 3)) / (((`Diem15p` is not null) + ((`Diem1Tiet` is not null) * 2)) + ((`DiemHK` is not null) * 3)))) STORED,
+  `DiemTB` decimal(3,1) GENERATED ALWAYS AS ((((`Diem15p` + (`Diem1Tiet` * 2)) + (`DiemHK` * 3)) / (((`Diem15p` is not null) + ((`Diem1Tiet` is not null) * 2)) + ((`DiemHK` is not null) * 3)))) STORED,
   KEY `MaHS` (`MaHS`),
   KEY `MaMon` (`MaMon`),
   KEY `TenHK` (`TenHK`)
@@ -193,7 +193,7 @@ INSERT INTO `monhoc` (`MaMH`, `TENMH`) VALUES
 
 DROP TABLE IF EXISTS `taikhoan`;
 CREATE TABLE IF NOT EXISTS `taikhoan` (
-  `MaTK`  		int NOT NULL AUTO_INCREMENT,
+  `MaTK`  		varchar(11) NOT NULL UNIQUE,
   `TenDN` 	  varchar(50) NOT NULL UNIQUE,
   `MatKhau`   varchar(255)   NOT NULL,
   `ChucVu`		varchar(11) NOT NULL,
