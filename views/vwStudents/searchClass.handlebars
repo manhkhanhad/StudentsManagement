@@ -1,11 +1,22 @@
 <div class="card">
   <div class="card-body">
-    <div class="search-box">
-      <form action="search" class="search-form">
-        <input type="text" name="txtClass" placeholder="Search..." required>
-        <button type="submit"><i class="fa fa-search"></i></button>
-      </form>
-    </div>
+    <form action="" method="POST">
+      <select class="custom-select" id="txtLop" name="txtLop">
+        <option selected>Choose...</option>
+        <option value="10A1">10A1</option>
+        <option value="10A2">10A2</option>
+        <option value="10A3">10A3</option>
+        <option value="10A1">11A1</option>
+        <option value="10A2">11A2</option>
+        <option value="10A3">11A3</option>
+        <option value="10A1">12A1</option>
+        <option value="10A2">12A2</option>
+        <option value="10A3">12A3</option>
+      </select>
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="submit">Search</button>
+      </div>
+    </form>
     {{#if this.empty}}
       <div class="card-body">
         <h4 class="card-text">Khong co du lieu</h4>

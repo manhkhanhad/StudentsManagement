@@ -6,6 +6,8 @@ const StudentModel = require('../models/students.model')
 router.get('/', async function(req, res) {
     const list = await StudentModel.all();
 
+    console.log(list);
+    
     res.render('vwStudents/list',
     {
         students: list,
@@ -72,15 +74,20 @@ router.post('/del', async function(req, res) {
     res.redirect('/admin/students/');
 });
 
-router.get('/searchclass', async function(req, res) {
-    const searchque = {
-        MaLop: req.body.txtClass,
-    }
-    const results = await StudentModel.searchClass(searchque);
+router.get('/searchclass', function(req, res) {
+    res.render('vwStudents/searchclass', {empty: 1});
+});
 
-    console.log(results);
-
-    res.send(results);
+router.post('/searchclass', async function(req, res) {
+    const lop =  req.body.txtLop;
+    const result = await StudentModel.searchclass(lop);
+    
+    console.log(result);
+    res.render('vwStudents/searchclass',
+    {
+        students: result,
+        empty : result.length === 0
+    });
 });
 
 module.exports = router;
