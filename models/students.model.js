@@ -25,4 +25,7 @@ module.exports = {
         }
         return db.del("hocsinh", condition);
     },
+    searchclass: function(lop){
+        return db.load(`select * from hocsinh where MaLop = "${lop}"`);
+    },
 }

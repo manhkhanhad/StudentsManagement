@@ -74,4 +74,20 @@ router.post('/del', async function(req, res) {
     res.redirect('/admin/students/');
 });
 
+router.get('/searchclass', function(req, res) {
+    res.render('vwStudents/searchclass', {empty: 1});
+});
+
+router.post('/searchclass', async function(req, res) {
+    const lop =  req.body.txtLop;
+    const result = await StudentModel.searchclass(lop);
+    
+    console.log(result);
+    res.render('vwStudents/searchclass',
+    {
+        students: result,
+        empty : result.length === 0
+    });
+});
+
 module.exports = router;
