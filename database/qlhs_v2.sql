@@ -66,8 +66,7 @@ CREATE TABLE IF NOT EXISTS `chitietbangdiem` (
   `Diem15p` decimal(3,1) DEFAULT NULL,
   `Diem1Tiet` decimal(3,1) DEFAULT NULL,
   `DiemHK` decimal(3,1) DEFAULT NULL,
-  `DiemTB` decimal(3,1) GENERATED ALWAYS AS ((((`Diem15p` + (`Diem1Tiet` * 2)) + (`DiemHK` * 3)) / (((`Diem15p` is not null) + ((`Diem1Tiet` is not null) * 2)) + ((`DiemHK` is not null) * 3)))) STORED,
-  PRIMARY KEY (`MaChiTietBangDiem`),
+--  `DiemTB` decimal(3,1) GENERATED ALWAYS AS ((((`Diem15p` + (`Diem1Tiet` * 2)) + (`DiemHK` * 3)) / (((`Diem15p` is not null) + ((`Diem1Tiet` is not null) * 2)) + ((`DiemHK` is not null) * 3)))) STORED,
   KEY `MaBangDiem` (`MaBangDiem`),
   KEY `MaHS` (`MaHS`)
 ) ENGINE=MyISAM AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
