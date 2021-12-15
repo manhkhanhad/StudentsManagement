@@ -6,7 +6,7 @@ module.exports = {
     },
     
     getGradeTabel: function (entity) {
-        return db.load(`select * from ChiTietBangDiem where MaBangDiem = '${entity}'`);
+        return db.load(`select HoTen,HOCSINH.MaHS, Diem15p, Diem1Tiet, DiemHK, DiemTB from ChiTietBangDiem join HOCSINH on ChiTietBangDiem.MaHS = HOCSINH.MaHS where MaBangDiem = '${entity}'`);
     },
 
     insertIntoTable: function (entity, tabel_name) {

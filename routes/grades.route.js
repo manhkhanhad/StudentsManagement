@@ -4,18 +4,19 @@ const db = require('../utils/db')
 const GradeModel = require('../models/grades.model')
 
 // Tra cuu bang diem lop hoc
-// url example = http://localhost:3000/grade/gradeTabel?Lop=10A1&HocKy=HK1&Mon=Toa
+// url example = http://localhost:3000/grade/gradeTable
 
-router.get('/gradeTabel', async function(req, res) {
+router.get('/gradeTable', async function(req, res) {
     const entity = 
     {
-        Lop: req.query.Lop,
-        HocKy: req.query.HocKy,
-        Mon: req.query.Mon
+        Lop: req.body.Lop,
+        HocKy: req.body.HocKy,
+        Mon: req.body.Mon
     }
-    console.log(entity)
+    //console.log(entity)
     
     const MaBangDiem = await GradeModel.getGradeTableID(entity)
+    console.log(MaBangDiem)
     if (MaBangDiem.length > 0) {
         const MaChiTietBangDiem = MaBangDiem[0].MaBangDiem
 
@@ -29,16 +30,18 @@ router.get('/gradeTabel', async function(req, res) {
 });
 
 // Tao moi bang diem lop hoc
-// url example = http://localhost:3000/grade/addNewGradeTable?Lop=10A1&HocKy=HK1&Mon=Toa
+// url example = http://localhost:3000/grade/addNewGradeTable
 router.post('/addNewGradeTable', async function(req, res) {
     const entity = 
     {
-        MaLop: req.query.Lop,
-        MaHK: req.query.HocKy,
-        MaMon: req.query.Mon,
+        MaLop: req.body.Lop,
+        MaHK: req.body.HocKy,
+        MaMon: req.body.Mon
     }
+    console.log(entity)
+
     // Create new entry in table BangDiem
-    const MaBangDiem = await GradeModel.insertIntoTable(entity, 'BangDiem').insertId
+    const MaBangDiem = await GradeModel.insertIntoTable(entity, 'BangDiem')//.insertId
     // Get student ID list by Class ID
     const studentList = await GradeModel.getStudentListByClassID(entity.MaLop)
     // Create empty entry in table ChiTietBangDiem
@@ -47,10 +50,10 @@ router.post('/addNewGradeTable', async function(req, res) {
     for (const student of studentList) 
     {
         console.log(student.MaHS);
-        chiTietBangDiemList.push([MaBangDiem, student.MaHS])
+        chiTietBangDiemList.push([MaBangDiem.insertId, student.MaHS])
     }
     const rs = await GradeModel.insertEmptyGradeList(chiTietBangDiemList)
-    res.send(chiTietBangDiemList)
+    res.send(rs)
 });
 
 
