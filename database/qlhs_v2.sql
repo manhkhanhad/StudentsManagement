@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `student`
+-- Database: `student_test`
 --
 
 -- --------------------------------------------------------
@@ -67,6 +67,7 @@ CREATE TABLE IF NOT EXISTS `chitietbangdiem` (
   `Diem1Tiet` decimal(3,1) DEFAULT NULL,
   `DiemHK` decimal(3,1) DEFAULT NULL,
 --  `DiemTB` decimal(3,1) GENERATED ALWAYS AS ((((`Diem15p` + (`Diem1Tiet` * 2)) + (`DiemHK` * 3)) / (((`Diem15p` is not null) + ((`Diem1Tiet` is not null) * 2)) + ((`DiemHK` is not null) * 3)))) STORED,
+  PRIMARY KEY (`MaChiTietBangDiem`),
   KEY `MaBangDiem` (`MaBangDiem`),
   KEY `MaHS` (`MaHS`)
 ) ENGINE=MyISAM AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
@@ -320,16 +321,16 @@ DELIMITER ;
 
 DROP TABLE IF EXISTS `monhoc`;
 CREATE TABLE IF NOT EXISTS `monhoc` (
-  `MaMH` varchar(3) NOT NULL,
+  `MaMon` varchar(3) NOT NULL,
   `TENMH` varchar(20) NOT NULL,
-  PRIMARY KEY (`MaMH`)
+  PRIMARY KEY (`MaMon`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `monhoc`
 --
 
-INSERT INTO `monhoc` (`MaMH`, `TENMH`) VALUES
+INSERT INTO `monhoc` (`MaMon`, `TENMH`) VALUES
 ('TOA', 'TOAN'),
 ('VLY', 'Vat ly'),
 ('HOA', 'Hoa hoc'),

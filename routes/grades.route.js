@@ -36,10 +36,14 @@ router.post('/addNewGradeTable', async function(req, res) {
     {
         MaLop: req.body.Lop,
         MaHK: req.body.HocKy,
-        MaMon: req.body.Mon
+        TenMon: req.body.Mon
     }
+    //Get MaMon
+    const MaMon = await GradeModel.getSubjectID(entity)
+    console.log(MaMon)
+    entity["MaMon"] = MaMon[0].MaMon
+    delete entity["TenMon"]
     console.log(entity)
-
     // Create new entry in table BangDiem
     const MaBangDiem = await GradeModel.insertIntoTable(entity, 'BangDiem')//.insertId
     // Get student ID list by Class ID
