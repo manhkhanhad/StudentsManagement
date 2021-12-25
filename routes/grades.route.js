@@ -13,7 +13,7 @@ router.get('/gradeTable', async function(req, res) {
         HocKy: req.body.HocKy,
         Mon: req.body.Mon
     }
-    //console.log(entity)
+    console.log(entity)
     
     const MaBangDiem = await GradeModel.getGradeTableID(entity)
     console.log(MaBangDiem)
