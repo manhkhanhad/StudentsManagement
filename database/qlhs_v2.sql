@@ -93,7 +93,8 @@ INSERT INTO `chitietbangdiem` (`MaChiTietBangDiem`, `MaBangDiem`, `MaHS`, `Diem1
 --
 DROP TRIGGER IF EXISTS `update_SLDMon_when_delete_chitietbangdiem`;
 DELIMITER $$
-CREATE TRIGGER `update_SLDMon_when_delete_chitietbangdiem` AFTER DELETE ON `chitietbangdiem` FOR EACH ROW BEGIN
+-- CREATE TRIGGER `update_SLDMon_when_delete_chitietbangdiem` AFTER DELETE ON `chitietbangdiem` FOR EACH ROW BEGIN
+-- TRIGGER COLLISION
 	DECLARE so_luong_dat INT;
     DECLARE so_hoc_sinh INT;
     SELECT COUNT(MaChiTietBangDiem) into @so_luong_dat FROM bangdiem INNER JOIN chitietbangdiem ON bangdiem.MaBangDiem = chitietbangdiem.MaBangDiem WHERE bangdiem.MaBangDiem = OLD.MaBangDiem and chitietbangdiem.DiemTB >= 5;
@@ -128,7 +129,8 @@ $$
 DELIMITER ;
 DROP TRIGGER IF EXISTS `update_TBHK_when_delete_chitietbangdiem`;
 DELIMITER $$
-CREATE TRIGGER `update_TBHK_when_delete_chitietbangdiem` AFTER DELETE ON `chitietbangdiem` FOR EACH ROW BEGIN
+-- CREATE TRIGGER `update_TBHK_when_delete_chitietbangdiem` AFTER DELETE ON `chitietbangdiem` FOR EACH ROW BEGIN
+-- TRIGGER COLLISION
 	UPDATE hocsinh INNER JOIN (SELECT AVG(DEL.DiemTB) as TB, DEL.MaHS, MaHK, COUNT(MaMon) as SLMon FROM bangdiem JOIN (SELECT * FROM chitietbangdiem WHERE chitietbangdiem.MaChiTietBangDiem = OLD.MaChiTietBangDiem) as DEL WHERE bangdiem.MaBangDiem = DEL.MaBangDiem GROUP By MaHS, MaHK) as KQ
 	SET hocsinh.TBHK1 = IF(KQ.MaHK = 'HK1' AND KQ.SLMon >= 2, KQ.TB, NULL),
 		hocsinh.TBHK2 = IF(KQ.MaHK = 'HK2' AND KQ.SLMon >= 2, KQ.TB, NULL)
