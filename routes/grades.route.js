@@ -21,6 +21,7 @@ router.post('/gradeTable', async function(req, res) {
         const MaChiTietBangDiem = MaBangDiem[0].MaBangDiem
 
         const gradeListClass = await GradeModel.getGradeTabel(MaChiTietBangDiem)
+        gradeListClass.push({"MaBangDiem":MaChiTietBangDiem})
         console.log(gradeListClass);
         res.send(gradeListClass)
     }
