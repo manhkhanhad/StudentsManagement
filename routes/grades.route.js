@@ -6,7 +6,7 @@ const GradeModel = require('../models/grades.model')
 // Tra cuu bang diem lop hoc
 // url example = http://localhost:3000/grade/gradeTable
 
-router.get('/gradeTable', async function(req, res) {
+router.post('/gradeTable', async function(req, res) {
     const entity = 
     {
         Lop: req.body.Lop,
@@ -16,7 +16,7 @@ router.get('/gradeTable', async function(req, res) {
     console.log(entity)
     
     const MaBangDiem = await GradeModel.getGradeTableID(entity)
-    console.log(MaBangDiem)
+    console.log(MaBangDiem.length)
     if (MaBangDiem.length > 0) {
         const MaChiTietBangDiem = MaBangDiem[0].MaBangDiem
 
@@ -25,7 +25,7 @@ router.get('/gradeTable', async function(req, res) {
         res.send(gradeListClass)
     }
     else {
-        res.send(null)
+        res.send([])
     }
 });
 
