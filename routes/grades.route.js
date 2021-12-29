@@ -38,6 +38,7 @@ router.post('/addNewGradeTable', async function(req, res) {
         MaHK: req.body.HocKy,
         TenMon: req.body.Mon
     }
+    console.log(entity)
     //Get MaMon
     const MaMon = await GradeModel.getSubjectID(entity)
     console.log(MaMon)
