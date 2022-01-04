@@ -1,4 +1,5 @@
 node_modules/
 package-lock.json
 index.d.ts
-config/default.json
+/default.json
+.gitignore

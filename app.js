@@ -28,6 +28,7 @@ app.get('/', function(req, res) {
 app.use('/admin/students/', require('./routes/students.route'));
 app.use('/account', require('./routes/accounts.route'));
 app.use('/grade', require('./routes/grades.route'));
+app.use('/admin/settings', require('./routes/settings.route'));
 
 app.use(function (req, res){
     res.render('404', {layout: false});

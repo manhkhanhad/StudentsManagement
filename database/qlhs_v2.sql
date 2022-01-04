@@ -67,6 +67,7 @@ CREATE TABLE IF NOT EXISTS `chitietbangdiem` (
   `Diem1Tiet` decimal(3,1) DEFAULT NULL,
   `DiemHK` decimal(3,1) DEFAULT NULL,
 --  `DiemTB` decimal(3,1) GENERATED ALWAYS AS ((((`Diem15p` + (`Diem1Tiet` * 2)) + (`DiemHK` * 3)) / (((`Diem15p` is not null) + ((`Diem1Tiet` is not null) * 2)) + ((`DiemHK` is not null) * 3)))) STORED,
+
   PRIMARY KEY (`MaChiTietBangDiem`),
   KEY `MaBangDiem` (`MaBangDiem`),
   KEY `MaHS` (`MaHS`)
@@ -323,25 +324,30 @@ DELIMITER ;
 
 DROP TABLE IF EXISTS `monhoc`;
 CREATE TABLE IF NOT EXISTS `monhoc` (
-  `MaMon` varchar(3) NOT NULL,
-  `TENMH` varchar(20) NOT NULL,
-  PRIMARY KEY (`MaMon`)
+
+  `MaMH` int NOT NULL AUTO_INCREMENT,
+  `TenMH` varchar(20) NOT NULL,
+  PRIMARY KEY (`MaMH`)
+
+
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `monhoc`
 --
 
-INSERT INTO `monhoc` (`MaMon`, `TENMH`) VALUES
-('TOA', 'TOAN'),
-('VLY', 'Vat ly'),
-('HOA', 'Hoa hoc'),
-('SIN', 'Sinh hoc'),
-('LSU', 'Lich su'),
-('DIA', 'Dia ly'),
-('VAN', 'Ngu van'),
-('DDU', 'Dao duc'),
-('TDU', 'The duc');
+
+INSERT INTO `monhoc` (`MaMH`, `TenMH`) VALUES
+(1, 'TOAN'),
+(2, 'Vat ly'),
+(3, 'Hoa hoc'),
+(4, 'Sinh hoc'),
+(5, 'Lich su'),
+(6, 'Dia ly'),
+(7, 'Ngu van'),
+(8, 'Dao duc'),
+(9, 'The duc');
+
 
 -- --------------------------------------------------------
 
