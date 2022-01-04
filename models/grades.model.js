@@ -2,7 +2,7 @@ const db = require("../utils/db");
 
 module.exports = {
     getGradeTableID: async function (entity) {
-        return db.load(`select MaBangDiem from bangdiem where MaMon = '${entity.Mon}' and MaHK = '${entity.HocKy}' and MaLop = '${entity.Lop}'`);
+        return db.load(`select MaBangDiem from bangdiem join monhoc on bangdiem.MaMon = monhoc.MaMon where TenMH = '${entity.Mon}' and MaHK = '${entity.HocKy}' and MaLop = '${entity.Lop}'`);
     },
     
     getGradeTabel: function (entity) {
@@ -32,5 +32,9 @@ module.exports = {
 
     createClassReport: function (entity) {
         return db.load(`select * from ttlop where MaHK = '${entity.MaHK}'`);
+    },
+
+    getSubjectID: function (entity) {
+        return db.load(`select MaMon from monhoc where TenMH = '${entity.TenMon}'`);
     }
 };

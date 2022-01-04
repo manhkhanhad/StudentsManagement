@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `student`
+-- Database: `student_test`
 --
 
 -- --------------------------------------------------------
@@ -67,7 +67,8 @@ CREATE TABLE IF NOT EXISTS `chitietbangdiem` (
   `Diem1Tiet` decimal(3,1) DEFAULT NULL,
   `DiemHK` decimal(3,1) DEFAULT NULL,
 --  `DiemTB` decimal(3,1) GENERATED ALWAYS AS ((((`Diem15p` + (`Diem1Tiet` * 2)) + (`DiemHK` * 3)) / (((`Diem15p` is not null) + ((`Diem1Tiet` is not null) * 2)) + ((`DiemHK` is not null) * 3)))) STORED,
-  PRIMARY KEY `MaChiTietBangDiem` (`MaChiTietBangDiem`),
+
+  PRIMARY KEY (`MaChiTietBangDiem`),
   KEY `MaBangDiem` (`MaBangDiem`),
   KEY `MaHS` (`MaHS`)
 ) ENGINE=MyISAM AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
@@ -323,14 +324,18 @@ DELIMITER ;
 
 DROP TABLE IF EXISTS `monhoc`;
 CREATE TABLE IF NOT EXISTS `monhoc` (
+
   `MaMH` int NOT NULL AUTO_INCREMENT,
   `TenMH` varchar(20) NOT NULL,
   PRIMARY KEY (`MaMH`)
+
+
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `monhoc`
 --
+
 
 INSERT INTO `monhoc` (`MaMH`, `TenMH`) VALUES
 (1, 'TOAN'),
@@ -342,6 +347,7 @@ INSERT INTO `monhoc` (`MaMH`, `TenMH`) VALUES
 (7, 'Ngu van'),
 (8, 'Dao duc'),
 (9, 'The duc');
+
 
 -- --------------------------------------------------------
 
@@ -364,21 +370,9 @@ CREATE TABLE IF NOT EXISTS `taikhoan` (
 --
 
 INSERT INTO `taikhoan` (`MaTK`, `TenDN`, `MatKhau`, `ChucVu`) VALUES
-('HS19220001', '19220001', '123456', 'HocSinh'),
-('HS19220002', '19220002', '123456', 'HocSinh'),
-('HS19220003', '19220003', '123456', 'HocSinh'),
-('HS19220004', '19220004', '123456', 'HocSinh'),
-('HS19220005', '19220005', '123456', 'HocSinh'),
-('HS20230001', '20230001', '123456', 'HocSinh'),
-('HS20230002', '20230002', '123456', 'HocSinh'),
-('HS20230003', '20230003', '123456', 'HocSinh'),
-('HS20230004', '20230004', '123456', 'HocSinh'),
-('HS20230005', '20230005', '123456', 'HocSinh'),
-('HS21240001', '21240001', '123456', 'HocSinh'),
-('HS21240002', '21240002', '123456', 'HocSinh'),
-('HS21240003', '21240003', '123456', 'HocSinh'),
-('HS21240004', '21240004', '123456', 'HocSinh'),
-('HS21240005', '21240005', '123456', 'HocSinh');
+('GV2000', '1922000', '123456', 'GiaoVien'),
+('GV2001', '1922001', '123456', 'GiaoVien'),
+('GV2002', '1922002', '123456', 'GiaoVien'),
 
 -- --------------------------------------------------------
 

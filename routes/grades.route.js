@@ -6,26 +6,27 @@ const GradeModel = require('../models/grades.model')
 // Tra cuu bang diem lop hoc
 // url example = http://localhost:3000/grade/gradeTable
 
-router.get('/gradeTable', async function(req, res) {
+router.post('/gradeTable', async function(req, res) {
     const entity = 
     {
         Lop: req.body.Lop,
         HocKy: req.body.HocKy,
         Mon: req.body.Mon
     }
-    //console.log(entity)
+    console.log(entity)
     
     const MaBangDiem = await GradeModel.getGradeTableID(entity)
-    console.log(MaBangDiem)
+    console.log(MaBangDiem.length)
     if (MaBangDiem.length > 0) {
         const MaChiTietBangDiem = MaBangDiem[0].MaBangDiem
 
         const gradeListClass = await GradeModel.getGradeTabel(MaChiTietBangDiem)
+        gradeListClass.push({"MaBangDiem":MaChiTietBangDiem})
         console.log(gradeListClass);
         res.send(gradeListClass)
     }
     else {
-        res.send(null)
+        res.send([])
     }
 });
 
@@ -36,10 +37,15 @@ router.post('/addNewGradeTable', async function(req, res) {
     {
         MaLop: req.body.Lop,
         MaHK: req.body.HocKy,
-        MaMon: req.body.Mon
+        TenMon: req.body.Mon
     }
     console.log(entity)
-
+    //Get MaMon
+    const MaMon = await GradeModel.getSubjectID(entity)
+    console.log(MaMon)
+    entity["MaMon"] = MaMon[0].MaMon
+    delete entity["TenMon"]
+    console.log(entity)
     // Create new entry in table BangDiem
     const MaBangDiem = await GradeModel.insertIntoTable(entity, 'BangDiem')//.insertId
     // Get student ID list by Class ID
