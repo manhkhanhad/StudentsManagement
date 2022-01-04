@@ -8,11 +8,7 @@ router.get('/', async function(req, res) {
 
     console.log(list);
     
-    res.render('vwStudents/list',
-    {
-        students: list,
-        empty : list.length === 0
-    });
+    res.send(list);
 });
 
 router.get('/add', function(req, res) {
