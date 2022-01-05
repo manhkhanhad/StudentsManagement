@@ -17,18 +17,17 @@ router.get('/add', function(req, res) {
 
 router.post('/add', async function(req, res) {
     const entity = {
-        MaHS: req.body.txtStudentID,
-        MaTK: req.body.txtAccount,
-        HoTen: req.body.txtName,
-        GioiTinh: req.body.txtGender,
-        NgaySinh: req.body.txtBirth,
-        DiaChi: req.body.txtAddress,
-        Email: req.body.txtEmail,
-        MaLop: req.body.txtClass,
+        MaHS: req.body.MaHS,
+        MaTK: req.body.MaHS,
+        HoTen: req.body.HoTen,
+        GioiTinh: req.body.GioiTinh,
+        NgaySinh: req.body.NgaySinh,
+        DiaChi: req.body.DiaChi,
+        Email: req.body.Email,
+        MaLop: req.body.MaLop,
     }
     const rs = await StudentModel.add(entity);
-    console.log(entity);
-    res.render('vwStudents/add');
+    res.send("done");
 });
 
 
@@ -46,44 +45,32 @@ router.get('/edit', async function(req, res) {
 
 router.post('/update', async function(req, res) {
     const entity = {
-        MaHS: req.body.txtStudentID,
-        MaTK: req.body.txtAccount,
-        HoTen: req.body.txtName,
-        GioiTinh: req.body.txtGender,
-        NgaySinh: req.body.txtBirth,
-        DiaChi: req.body.txtAddress,
-        Email: req.body.txtEmail,
-        MaLop: req.body.txtClass,
+        MaHS: req.body.MaHS,
+        HoTen: req.body.HoTen,
+        DiaChi: req.body.DiaChi,
+        Email: req.body.Email,
+        MaLop: req.body.MaLop,
     }
     const rs = await StudentModel.patch(entity);
-    //console.log(entity);
-    res.redirect('/admin/students/');
+
+    res.send("done");
 });
 
 
 router.post('/del', async function(req, res) {
     const entity = {
-        MaHS: req.body.txtStudentID,
+        MaHS: req.body.MaHS,
     }
     const rs = await StudentModel.del(entity);
-    console.log(rs);
-    res.redirect('/admin/students/');
-});
 
-router.get('/searchclass', function(req, res) {
-    res.render('vwStudents/searchclass', {empty: 1});
+    res.send("done");
 });
 
 router.post('/searchclass', async function(req, res) {
-    const lop =  req.body.txtLop;
-    const result = await StudentModel.searchclass(lop);
-    
-    console.log(result);
-    res.render('vwStudents/searchclass',
-    {
-        students: result,
-        empty : result.length === 0
-    });
+    const lop =  req.body.Lop;
+    console.log(lop);
+    const result = await StudentModel.searchClass(lop);
+    res.send(result);
 });
 
 module.exports = router;

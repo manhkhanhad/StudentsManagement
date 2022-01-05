@@ -12,12 +12,8 @@ module.exports = {
         return db.load(`select * from hocsinh where MaHS = ${id}`);
     },
     patch: function(entity){
-        const condition = {
-            MaHS: entity.MaHS
-        }
-        delete entity.MaHS;
-        delete entity.NgaySinh; // BUG: datatime ==> do not update ngaysinh
-        return db.patch("hocsinh", entity, condition);
+        sql = `update hocsinh set HoTen = ${entity.HoTen}, DiaChi = ${entity.DiaChi}, Email = ${entity.Email}, MaLop = ${entity.MaLop} where MaHS = ${entity.MaHS}`
+        return db.customQuery(sql);
     },
     del: function(entity){
         const condition = {
@@ -25,7 +21,7 @@ module.exports = {
         }
         return db.del("hocsinh", condition);
     },
-    searchclass: function(lop){
+    searchClass: function(lop){
         return db.load(`select * from hocsinh where MaLop = "${lop}"`);
     },
 }
